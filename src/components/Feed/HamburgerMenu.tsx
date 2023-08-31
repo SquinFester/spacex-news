@@ -1,5 +1,4 @@
-import { Button } from "@/components/ui/Button";
-import { MoveLeft } from "lucide-react";
+import { ChevronLeft } from "lucide-react";
 import {
   Sheet,
   SheetClose,
@@ -9,28 +8,36 @@ import {
   SheetTrigger,
 } from "@/components/ui/Sheet";
 import Image from "next/image";
+import Link from "next/link";
+import { cn } from "@/lib/utils";
 export const HamburgerMenu = () => {
   return (
     <Sheet>
       <SheetTrigger asChild>
         <Image src="/hamburger.svg" alt="menu button" width={35} height={35} />
       </SheetTrigger>
-      <SheetContent side="left">
+      <SheetContent side="left" className="flex flex-col">
         <SheetHeader className="items-end">
           <SheetClose asChild>
-            <Button variant="secondary" className="w-20">
-              <MoveLeft width={35} />
-            </Button>
+            <ChevronLeft width={50} height={40} />
           </SheetClose>
         </SheetHeader>
-        <section>
-          <ul>
-            <li>Search</li>
-            <li>Saved</li>
-            <li>Profile</li>
+        <section className="flex-1">
+          <ul className="divide-y">
+            <li className="py-4 text-2xl active:bg-white active:text-darkGray transition">
+              <Link href="/explore">Explore</Link>
+            </li>
+            <li className="py-4 text-2xl active:bg-white active:text-darkGray transition">
+              <Link href="/saved">Saved</Link>
+            </li>
+            <li className="py-4 text-2xl active:bg-white active:text-darkGray transition">
+              <Link href="/profile">Profile</Link>
+            </li>
           </ul>
         </section>
-        <SheetFooter>&copy; Przymencki {new Date().getFullYear()}</SheetFooter>
+        <SheetFooter className="text-center">
+          &copy; Przymencki {new Date().getFullYear()}
+        </SheetFooter>
       </SheetContent>
     </Sheet>
   );

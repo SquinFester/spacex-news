@@ -23,11 +23,11 @@ export const CategoryTabs = () => {
         {CategoryTabsList.map((tab, index) => (
           <li
             key={index}
-            className={`pb-3 capitalize text-lightGray
+            className={`pb-3 capitalize text-lightGray border-solid border-b-2 
           ${
             isActive(tab.name)
-              ? "border-solid border-b-2 border-red-500 font-medium text-white"
-              : ""
+              ? " border-customRed font-medium text-white"
+              : "border-lightGray"
           }
           `}
           >
