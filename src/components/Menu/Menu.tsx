@@ -37,14 +37,16 @@ const Menu = () => {
     <nav className="fixed bottom-0 left-0 right-0 bg-dark border-t border-solid border-lightGray">
       <ul className="grid grid-cols-4">
         {MenuList.map((item, index) => (
-          <li
-            key={index}
-            className={`capitalize flex flex-col items-center py-4 text-lightGray ${
-              isActive(item.name) && "text-white"
-            }`}
-          >
-            {item.icon(isActive(item.name) ? "#fff" : "#595959")}
-            <Link href={item.path}>{item.name}</Link>
+          <li key={index}>
+            <Link
+              href={item.path}
+              className={`capitalize flex flex-col items-center py-4 text-lightGray text-sm ${
+                isActive(item.name) && "text-white"
+              }`}
+            >
+              {item.icon(isActive(item.name) ? "#fff" : "#595959")}
+              {item.name}
+            </Link>
           </li>
         ))}
       </ul>
