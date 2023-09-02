@@ -34,7 +34,7 @@ const Menu = () => {
     return name === path[1];
   };
   return (
-    <nav className="fixed bottom-0 left-0 right-0 bg-dark border-t border-solid border-lightGray">
+    <nav className="fixed bottom-0 left-0 right-0 bg-dark border-t border-solid border-lightGray/70">
       <ul className="grid grid-cols-4">
         {MenuList.map((item, index) => (
           <li key={index}>
