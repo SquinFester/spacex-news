@@ -1,16 +1,12 @@
-import Image from "next/image";
+import { categoriesList } from "@/lib/categoriesList";
 
 export const ArticleCategory = ({ category }: { category: string }) => {
+  const currentCategory = categoriesList.find((c) => c.name === category);
   return (
-    <section className="flex gap-2 items-end">
-      <Image
-        src="/tech-icon.svg"
-        alt="technology icon"
-        width={18}
-        height={18}
-      />
+    <section className="flex gap-2">
+      {currentCategory?.icon("#BDA6F5", 20, 20)}
       <h2 className="text-customPurple text-lg font-medium uppercase leading-none">
-        {category}
+        {currentCategory?.name}
       </h2>
     </section>
   );

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { FeedIcon, ExploreIcon, SavedIcon, ProfileIcon } from "./MenuIcons";
+import { FeedIcon, ExploreIcon, SavedIcon, ProfileIcon } from "../Icons/Icons";
 import { usePathname } from "next/navigation";
 
 const MenuList = [

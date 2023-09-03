@@ -23,6 +23,7 @@ module.exports = {
         customRed: "#DD403C",
         secondDark: "#181818",
         customPurple: "#BDA6F5",
+        secondLightGray: "rgb(46,46,46)",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

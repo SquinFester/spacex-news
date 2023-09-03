@@ -1,6 +1,6 @@
 import { format } from "date-fns";
-import Image from "next/image";
 import Link from "next/link";
+import { SavedIcon, TripleDotsIcon } from "../Icons/Icons";
 
 type LinkToArticleProps = {
   category: string;
@@ -27,9 +27,9 @@ export const LinkToArticle = ({
         <time className="text-xs text-lightGray">
           {format(date, "MMM dd, yyyy")} • {date.getDay()} min read
         </time>
-        <div className="flex">
-          <Image src="/save-icon.svg" alt="Aa icon" width={30} height={30} />
-          <Image src="/triple-dot.svg" alt="Aa icon" width={30} height={30} />
+        <div className="flex items-center">
+          <SavedIcon width={20} height={20} color="#888888" />
+          <TripleDotsIcon width={20} height={20} color="#888888" />
         </div>
       </section>
     </Link>

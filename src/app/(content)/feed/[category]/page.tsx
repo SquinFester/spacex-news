@@ -70,7 +70,7 @@ const FeedCategory = ({ params: { category } }: FeedCategoryProps) => {
             <article
               key={history.id}
               ref={ref}
-              className="bg-secondDark rounded-md p-2"
+              className="bg-secondDark rounded-md focus:bg-secondLightGray/70 hover:bg-secondLightGray/70 transition p-2"
             >
               <LinkToArticle
                 category={category}

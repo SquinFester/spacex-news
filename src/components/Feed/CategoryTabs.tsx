@@ -2,13 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-
-const CategoryTabsList = [
-  { name: "tech", path: "/feed/tech" },
-  { name: "science", path: "/feed/science" },
-  { name: "education", path: "/feed/education" },
-  { name: "business", path: "/feed/business" },
-];
+import { categories } from "@/lib/categoriesList";
 
 export const CategoryTabs = () => {
   const pathname = usePathname();
@@ -20,18 +14,18 @@ export const CategoryTabs = () => {
   return (
     <nav>
       <ul className="grid grid-cols-4 text-center">
-        {CategoryTabsList.map((tab, index) => (
+        {categories.map((tab, index) => (
           <li
             key={index}
             className={`pb-3 capitalize text-lightGray border-solid border-b-2 
           ${
-            isActive(tab.name)
+            isActive(tab)
               ? " border-customRed font-medium text-white"
               : "border-lightGray"
           }
           `}
           >
-            <Link href={tab.path}>{tab.name}</Link>
+            <Link href={`/feed/${tab}`}>{tab}</Link>
           </li>
         ))}
       </ul>

@@ -12,6 +12,11 @@ const nextConfig = {
         destination: "/feed/tech",
         permanent: true,
       },
+      {
+        source: "/explore",
+        destination: "/explore/tech",
+        permanent: true,
+      },
     ];
   },
   images: {
