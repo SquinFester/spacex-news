@@ -1,4 +1,6 @@
-import { ArticleSection } from "@/components/Explore/ArticleSection";
+import { ExploreArticleSection } from "@/components/Explore/ExploreArticleSection";
+import { ExploreTabs } from "@/components/Explore/ExploreTabs";
+import { Searchbar } from "@/components/Explore/Searchbar";
 import { categories } from "@/lib/categoriesList";
 import { notFound } from "next/navigation";
 
@@ -19,28 +21,32 @@ const ExploreCategory = ({ params: { category } }: ExploreCategoryProps) => {
 
   return (
     <>
-      <ArticleSection
-        query="query Launches($limit: Int) {
+      <Searchbar />
+      <ExploreTabs />
+      <main>
+        <ExploreArticleSection
+          query="query Launches($limit: Int) {
       launches(limit: $limit) {
         id
         mission_name
         launch_date_utc
       }
     }"
-        category={category}
-        title="Recent News"
-      />
-      <ArticleSection
-        query="query Launches($limit: Int) {
+          category={category}
+          title="Recent News"
+        />
+        <ExploreArticleSection
+          query="query Launches($limit: Int) {
       launches(limit: $limit) {
         id
         mission_name
         launch_date_utc
       }
     }"
-        category={category}
-        title="Recommended"
-      />
+          category={category}
+          title="Recommended"
+        />
+      </main>
     </>
   );
 };

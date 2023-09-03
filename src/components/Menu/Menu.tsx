@@ -27,7 +27,7 @@ const MenuList = [
   },
 ];
 
-const Menu = () => {
+export const Menu = () => {
   const pathname = usePathname();
   const isActive = (name: string) => {
     const path = pathname.split("/");
@@ -53,4 +53,3 @@ const Menu = () => {
     </nav>
   );
 };
-export default Menu;

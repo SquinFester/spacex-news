@@ -15,10 +15,9 @@ export const ArticlePreview = ({
   title,
   date,
 }: ArticlePreviewProps) => {
-  const a = "FalconSat Ale luje";
   return (
     <article className="p-2 rounded-md bg-darkGray focus:bg-darkGray/70 hover:bg-secondLightGray/70">
-      <Link href={`/article/${category}/${id}`} className="space-y-2">
+      <Link href={`/article/explore/${category}/${id}`} className="space-y-2">
         <div className="w-[166px] h-[104px] bg-lightGray rounded-md" />
         <p className="text-sm text-lightGray">{date.getDay()} min • read</p>
 

@@ -1,17 +1,12 @@
 import { ArticleCategory } from "@/components/Article/ArticleCategory";
 import { ArticleContent } from "@/components/Article/ArticleContent";
-import { ArticleMenu } from "@/components/Article/ArticleMenu";
-import { categories } from "@/lib/categoriesList";
 import { graphQLClient } from "@/lib/graphql";
 import { gql } from "graphql-request";
 import Image from "next/image";
-import { notFound } from "next/navigation";
 
-type ArticleProps = {
-  params: {
-    category: string;
-    articleId: string;
-  };
+type FeedArticleProps = {
+  category: string;
+  articleId: string;
 };
 
 type FechedData = {
@@ -24,12 +19,6 @@ type FechedData = {
     details: string;
   };
 };
-
-export async function generateStaticParams() {
-  return categories.map((category) => ({
-    category: category,
-  }));
-}
 
 const query = gql`
   query History($historyId: ID!) {
@@ -47,9 +36,10 @@ const query = gql`
   }
 `;
 
-const Article = async ({ params: { category, articleId } }: ArticleProps) => {
-  if (!categories.includes(category)) notFound();
-
+export const FeedArticle = async ({
+  category,
+  articleId,
+}: FeedArticleProps) => {
   const { history } = await graphQLClient.request<FechedData>(query, {
     historyId: articleId,
   });
@@ -63,7 +53,6 @@ const Article = async ({ params: { category, articleId } }: ArticleProps) => {
 
   return (
     <>
-      <ArticleMenu />
       <div className="w-full h-[266px] overflow-hidden">
         <Image src="/google.png" alt="google image" width={400} height={266} />
       </div>
@@ -81,4 +70,3 @@ const Article = async ({ params: { category, articleId } }: ArticleProps) => {
     </>
   );
 };
-export default Article;

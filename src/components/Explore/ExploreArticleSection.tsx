@@ -1,5 +1,6 @@
 import { graphQLClient } from "@/lib/graphql";
 import { ArticlePreview } from "./ArticlePreview";
+import Link from "next/link";
 
 type ArticleSectionProps = {
   query: string;
@@ -11,7 +12,7 @@ type FechedData = {
   launches: FechedLaunch[];
 };
 
-export const ArticleSection = async ({
+export const ExploreArticleSection = async ({
   query,
   category,
   title,
@@ -24,7 +25,12 @@ export const ArticleSection = async ({
     <>
       <section className="flex justify-between my-4 px-4 items-center">
         <h1 className="text-xl font-semibold">{title}</h1>
-        <p className="text-sm text-lightGray">View more</p>
+        <Link
+          href={`/more/explore/${category}`}
+          className="text-sm text-lightGray"
+        >
+          View more
+        </Link>
       </section>
       <section className="pb-10 flex overflow-x-auto gap-6 items-center justify-between px-4 ">
         {launches.map((launch) => (

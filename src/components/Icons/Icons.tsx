@@ -279,7 +279,7 @@ export const TripleDotsIcon = ({
     <path
       d="M11.6668 6C12.2191 6 12.6668 5.55228 12.6668 5C12.6668 4.44772 12.2191 4 11.6668 4C11.1145 4 10.6668 4.44772 10.6668 5C10.6668 5.55228 11.1145 6 11.6668 6Z"
       stroke={color || "white"}
-      stroke-width="2"
+      strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
     />

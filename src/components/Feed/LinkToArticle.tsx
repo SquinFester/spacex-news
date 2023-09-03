@@ -16,7 +16,7 @@ export const LinkToArticle = ({
   date,
 }: LinkToArticleProps) => {
   return (
-    <Link href={`/article/${category}/${id}`} className="space-y-4">
+    <Link href={`/article/feed/${category}/${id}`} className="space-y-4">
       <section className="flex gap-2">
         <div className="bg-lightGray rounded-md min-w-[85px] h-16" />
         <h1 className="text-lg">

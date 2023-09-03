@@ -1,23 +1,13 @@
-"use client";
-
-import { useInfiniteQuery } from "@tanstack/react-query";
-import { gql } from "graphql-request";
-import { useIntersection } from "@mantine/hooks";
-import { useEffect, useRef } from "react";
-import { Loader2 } from "lucide-react";
-import { graphQLClient } from "@/lib/graphql";
 import { notFound } from "next/navigation";
 import { categories } from "@/lib/categoriesList";
-import { LinkToArticle } from "@/components/Feed/LinkToArticle";
+import { Header } from "@/components/Feed/Header";
+import Image from "next/image";
+import { FeedContent } from "@/components/Feed/FeedContent";
 
 type FeedCategoryProps = {
   params: {
     category: string;
   };
-};
-
-type FechedData = {
-  histories: FechedHistory[];
 };
 
 export async function generateStaticParams() {
@@ -26,70 +16,23 @@ export async function generateStaticParams() {
   }));
 }
 
-const query = gql`
-  query Histories($offset: Int, $limit: Int) {
-    histories(offset: $offset, limit: $limit) {
-      id
-      title
-      event_date_utc
-    }
-  }
-`;
-
 const FeedCategory = ({ params: { category } }: FeedCategoryProps) => {
   if (!categories.includes(category)) notFound();
 
-  const lastArticleRef = useRef<HTMLElement>(null);
-  const { ref, entry } = useIntersection({
-    root: lastArticleRef.current,
-    threshold: 1,
-  });
-
-  const { data, fetchNextPage, isFetching, isError } =
-    useInfiniteQuery<FechedData>({
-      queryKey: ["infinite-query"],
-      queryFn: async ({ pageParam = 0 }) =>
-        graphQLClient.request(query, {
-          offset: pageParam,
-          limit: pageParam + 5,
-        }),
-      getNextPageParam: (_, pages) => pages.length * 5,
-    });
-
-  useEffect(() => {
-    if (entry?.isIntersecting) {
-      fetchNextPage();
-    }
-  }, [entry, fetchNextPage]);
-
   return (
-    <section className="space-y-4 pb-20 ">
-      {data &&
-        data?.pages.map((historiesList) =>
-          historiesList.histories.map((history) => (
-            <article
-              key={history.id}
-              ref={ref}
-              className="bg-secondDark rounded-md focus:bg-secondLightGray/70 hover:bg-secondLightGray/70 transition p-2"
-            >
-              <LinkToArticle
-                category={category}
-                id={history.id}
-                title={history.title}
-                date={new Date(history.event_date_utc)}
-              />
-            </article>
-          ))
-        )}
-      {isFetching && (
-        <Loader2 className="w-6 h-6 text-lightGray mx-auto animate-spin" />
-      )}
-      {isError && (
-        <p className="text-center text-sm">
-          Sorry, something went wrong. Try again later.
-        </p>
-      )}
-    </section>
+    <>
+      <Header />
+      <main className="divide-y divide-lightGray/70 space-y-4 container py-4">
+        <Image
+          src="/dron.png"
+          alt="dron"
+          width={400}
+          height={150}
+          className="mx-auto"
+        />
+        <FeedContent category={category} />
+      </main>
+    </>
   );
 };
 export default FeedCategory;

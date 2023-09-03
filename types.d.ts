@@ -9,3 +9,8 @@ type FechedLaunch = {
   mission_name: string;
   launch_date_utc: Date;
 };
+
+type InfiniteScrollProps = {
+  category: string;
+  limit: number;
+};
