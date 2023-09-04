@@ -31,7 +31,7 @@ export const FetchMoreLaunches = ({ category, limit }: InfiniteScrollProps) => {
 
   const { data, fetchNextPage, isFetching, isError } =
     useInfiniteQuery<FechedData>({
-      queryKey: ["infinite-query"],
+      queryKey: ["infinite-launches"],
       queryFn: async ({ pageParam = 0 }) =>
         graphQLClient.request(query, {
           offset: pageParam,
@@ -49,8 +49,8 @@ export const FetchMoreLaunches = ({ category, limit }: InfiniteScrollProps) => {
   return (
     <>
       {data?.pages[0].launches &&
-        data?.pages.map((launchesList) =>
-          launchesList.launches.map((launch) => (
+        data?.pages.map((page) =>
+          page.launches.map((launch) => (
             <article
               key={launch.id}
               ref={ref}

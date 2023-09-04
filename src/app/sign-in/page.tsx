@@ -1,6 +1,6 @@
 "use client";
 
-import { signIn } from "next-auth/react";
+import { signIn, signOut } from "next-auth/react";
 
 const SignIn = () => {
   const logIn = async () => {
@@ -11,6 +11,11 @@ const SignIn = () => {
     }
   };
 
-  return <button onClick={logIn}>SignIn</button>;
+  return (
+    <>
+      <button onClick={logIn}>SignIn</button>
+      <button onClick={() => signOut()}>Signout</button>
+    </>
+  );
 };
 export default SignIn;

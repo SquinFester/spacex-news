@@ -1,14 +1,14 @@
-import { ArticleMenu } from "@/components/Article/ArticleMenu";
 import { ExploreArticle } from "@/components/Article/ExploreArticle";
 import { FeedArticle } from "@/components/Article/FeedArticle";
-import { categories } from "@/lib/categoriesList";
+import { getAuthSession } from "@/lib/auth";
+import { categories, typesList } from "@/lib/categoriesList";
+import { db } from "@/lib/db";
 import { notFound } from "next/navigation";
 
 type ArticleProps = {
   params: {
     type: string;
     category: string;
-
     articleId: string;
   };
 };
@@ -23,16 +23,31 @@ const Article = async ({
   params: { type, category, articleId },
 }: ArticleProps) => {
   if (!categories.includes(category)) notFound();
-  if (type !== "feed" && type !== "explore") notFound();
+  if (!typesList.includes(type)) notFound();
+  const session = await getAuthSession();
+
+  const isSaved = !!(await db.article.findFirst({
+    where: {
+      id: articleId,
+      userId: session?.user.id,
+    },
+  }));
 
   return (
     <>
-      <ArticleMenu />
       {type === "feed" && (
-        <FeedArticle category={category} articleId={articleId} />
+        <FeedArticle
+          category={category}
+          articleId={articleId}
+          isSaved={isSaved}
+        />
       )}
       {type === "explore" && (
-        <ExploreArticle category={category} articleId={articleId} />
+        <ExploreArticle
+          category={category}
+          articleId={articleId}
+          isSaved={isSaved}
+        />
       )}
     </>
   );

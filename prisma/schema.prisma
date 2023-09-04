@@ -52,6 +52,7 @@ model Article {
   type   String
   title  String
   date   DateTime
+  category String
   userId String
   user   User     @relation(fields: [userId], references: [id])
 }

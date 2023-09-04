@@ -3,10 +3,12 @@ import { ArticleContent } from "@/components/Article/ArticleContent";
 import { graphQLClient } from "@/lib/graphql";
 import { gql } from "graphql-request";
 import Image from "next/image";
+import { ArticleMenu } from "./ArticleMenu";
 
 type FeedArticleProps = {
   category: string;
   articleId: string;
+  isSaved: boolean;
 };
 
 type FechedData = {
@@ -39,6 +41,7 @@ const query = gql`
 export const FeedArticle = async ({
   category,
   articleId,
+  isSaved,
 }: FeedArticleProps) => {
   const { history } = await graphQLClient.request<FechedData>(query, {
     historyId: articleId,
@@ -53,6 +56,14 @@ export const FeedArticle = async ({
 
   return (
     <>
+      <ArticleMenu
+        category={category}
+        articleId={articleId}
+        type={"feed"}
+        title={title}
+        date={event_date_utc.toString()}
+        isSaved={isSaved}
+      />
       <div className="w-full h-[266px] overflow-hidden">
         <Image src="/google.png" alt="google image" width={400} height={266} />
       </div>

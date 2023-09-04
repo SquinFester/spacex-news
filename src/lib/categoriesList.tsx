@@ -33,3 +33,5 @@ export const categoriesList = [
     ),
   },
 ];
+
+export const typesList = ["feed", "explore"];

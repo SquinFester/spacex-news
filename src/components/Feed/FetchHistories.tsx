@@ -31,7 +31,7 @@ export const FetchHistories = ({ category, limit }: InfiniteScrollProps) => {
 
   const { data, fetchNextPage, isFetching, isError } =
     useInfiniteQuery<FechedData>({
-      queryKey: ["infinite-query"],
+      queryKey: ["infinite-histories"],
       queryFn: async ({ pageParam = 0 }) =>
         graphQLClient.request(query, {
           offset: pageParam,
@@ -49,8 +49,8 @@ export const FetchHistories = ({ category, limit }: InfiniteScrollProps) => {
   return (
     <>
       {data?.pages[0].histories &&
-        data?.pages.map((historiesList) =>
-          historiesList.histories.map((history) => (
+        data?.pages.map((page) =>
+          page.histories.map((history) => (
             <article
               key={history.id}
               ref={ref}
