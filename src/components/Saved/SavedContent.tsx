@@ -15,7 +15,7 @@ type FechedArticle = {
   category: string;
 };
 
-export const SavedContent = () => {
+export const SavedContent = ({ isSession }: { isSession: boolean }) => {
   const lastArticleRef = useRef<HTMLElement>(null);
   const { ref, entry } = useIntersection({
     root: lastArticleRef.current,
@@ -39,6 +39,9 @@ export const SavedContent = () => {
     }
   }, [entry, fetchNextPage]);
 
+  if (!isSession)
+    return <p className="text-center text-sm">The list is empty</p>;
+
   return (
     <>
       {data?.pages.map((page) =>
@@ -46,7 +49,7 @@ export const SavedContent = () => {
           <article
             key={article.id}
             ref={ref}
-            className="bg-secondDark rounded-md focus:bg-secondLightGray/70 hover:bg-secondLightGray/70 transition p-2"
+            className="bg-secondDark rounded-md focus:bg-secondLightGray/70 hover:bg-secondLightGray/70 transition p-2   max-w-5xl mx-auto"
           >
             <LinkToArticle
               category={article.category}
@@ -65,9 +68,6 @@ export const SavedContent = () => {
         <p className="text-center text-sm">
           Sorry, something went wrong. Try again later.
         </p>
-      )}
-      {data?.pages[0].length === 0 && !isFetching && !isError && (
-        <p className="text-center text-sm">The list is empty</p>
       )}
     </>
   );

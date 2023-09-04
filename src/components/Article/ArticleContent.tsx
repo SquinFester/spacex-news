@@ -21,7 +21,7 @@ export const ArticleContent = ({
   details,
 }: ArticleContentProps) => {
   return (
-    <article className="space-y-2">
+    <article className="space-y-2 max-w-2xl mx-auto">
       <h1 className="text-2xl font-semibold">{title}</h1>
       <time className="text-xs text-lightGray">
         {date.getDay()} min read • {format(date, "MMM dd, yyyy, pppp")}

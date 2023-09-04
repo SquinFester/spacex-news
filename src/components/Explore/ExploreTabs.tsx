@@ -11,7 +11,7 @@ export const ExploreTabs = () => {
   };
 
   return (
-    <nav>
+    <nav className="max-w-2xl mx-auto">
       <ul className="flex justify-between text-center overflow-auto px-4 gap-2">
         {categoriesList.map((tab, index) => (
           <li

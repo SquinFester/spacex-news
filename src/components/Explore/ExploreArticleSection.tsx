@@ -32,7 +32,7 @@ export const ExploreArticleSection = async ({
           View more
         </Link>
       </section>
-      <section className="pb-10 flex overflow-x-auto gap-6 items-center justify-between px-4 ">
+      <section className="pb-10 flex overflow-x-auto gap-6 items-center justify-between px-4">
         {launches.map((launch) => (
           <ArticlePreview
             key={launch.id}

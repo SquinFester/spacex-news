@@ -13,13 +13,12 @@ export const UserAvatar = async () => {
 
   return (
     <Avatar>
-      {user?.image ? (
-        <AvatarImage src={user?.image} alt="user avatar" />
-      ) : (
-        <AvatarFallback className="bg-secondLightGray">
-          <User />
-        </AvatarFallback>
+      {user?.image && (
+        <AvatarImage src={session ? user?.image : ""} alt="user avatar" />
       )}
+      <AvatarFallback className="bg-secondLightGray">
+        <User />
+      </AvatarFallback>
     </Avatar>
   );
 };

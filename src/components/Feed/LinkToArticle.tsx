@@ -1,6 +1,7 @@
 import { format } from "date-fns";
 import Link from "next/link";
-import { SavedIcon, TripleDotsIcon } from "../Icons/Icons";
+import { TripleDotsIcon } from "../Icons/Icons";
+import { SavedIconToggle } from "../Saved/SavedIconToggle";
 
 type LinkToArticleProps = {
   category: string;
@@ -29,8 +30,18 @@ export const LinkToArticle = ({
         <time className="text-xs text-lightGray">
           {format(date, "MMM dd, yyyy")} • {date.getDay()} min read
         </time>
-        <div className="flex items-center">
-          <SavedIcon width={20} height={20} color="#888888" />
+        <div className="flex items-cente">
+          <SavedIconToggle
+            articleId={id}
+            type={type}
+            category={category}
+            title={title}
+            date={date.toDateString()}
+            width={20}
+            height={20}
+            color="#888888"
+            isSaved={false}
+          />
           <TripleDotsIcon width={20} height={20} color="#888888" />
         </div>
       </section>

@@ -6,6 +6,7 @@ export async function GET(req: Request) {
   try {
     const url = new URL(req.url);
     const session = await getAuthSession();
+    if (!session) return new Response("Unauthorized", { status: 401 });
     const { limit, page } = z
       .object({
         limit: z.string(),

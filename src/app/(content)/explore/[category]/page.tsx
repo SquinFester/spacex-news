@@ -23,7 +23,7 @@ const ExploreCategory = ({ params: { category } }: ExploreCategoryProps) => {
     <>
       <Searchbar />
       <ExploreTabs />
-      <main>
+      <main className="max-w-[1050px] mx-auto">
         <ExploreArticleSection
           query="query Launches($limit: Int) {
       launches(limit: $limit) {

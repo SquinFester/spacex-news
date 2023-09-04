@@ -8,7 +8,6 @@ import { ArticleMenu } from "./ArticleMenu";
 type FeedArticleProps = {
   category: string;
   articleId: string;
-  isSaved: boolean;
 };
 
 type FechedData = {
@@ -41,7 +40,6 @@ const query = gql`
 export const FeedArticle = async ({
   category,
   articleId,
-  isSaved,
 }: FeedArticleProps) => {
   const { history } = await graphQLClient.request<FechedData>(query, {
     historyId: articleId,
@@ -62,9 +60,8 @@ export const FeedArticle = async ({
         type={"feed"}
         title={title}
         date={event_date_utc.toString()}
-        isSaved={isSaved}
       />
-      <div className="w-full h-[266px] overflow-hidden">
+      <div className="h-[266px] overflow-hidden mx-auto max-w-xl">
         <Image src="/google.png" alt="google image" width={400} height={266} />
       </div>
       <main className="px-4 py-6 space-y-4">

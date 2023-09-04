@@ -54,7 +54,7 @@ export const FetchMoreLaunches = ({ category, limit }: InfiniteScrollProps) => {
             <article
               key={launch.id}
               ref={ref}
-              className="bg-secondDark rounded-md focus:bg-secondLightGray/70 hover:bg-secondLightGray/70 transition p-2"
+              className="bg-secondDark rounded-md focus:bg-secondLightGray/70 hover:bg-secondLightGray/70 transition p-2  max-w-5xl mx-auto"
             >
               <LinkToArticle
                 category={category}

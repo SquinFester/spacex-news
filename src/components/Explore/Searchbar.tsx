@@ -3,7 +3,7 @@ import { Search } from "lucide-react";
 
 export const Searchbar = () => {
   return (
-    <section className="px-4 pt-6">
+    <section className="px-4 pt-6 max-w-xl mx-auto">
       <div className="relative">
         <Input
           placeholder="Search for News"

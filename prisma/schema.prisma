@@ -43,16 +43,16 @@ model User {
   image         String?
   emailVerified DateTime?
   Account       Account[]
-  Session       Session[]
   Article       Article[]
+  Session       Session[]
 }
 
 model Article {
-  id     String   @id
-  type   String
-  title  String
-  date   DateTime
+  id       String   @id
+  type     String
+  title    String
+  date     DateTime
+  userId   String
   category String
-  userId String
-  user   User     @relation(fields: [userId], references: [id])
+  user     User     @relation(fields: [userId], references: [id])
 }

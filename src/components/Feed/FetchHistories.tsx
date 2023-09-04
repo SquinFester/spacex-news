@@ -3,26 +3,20 @@
 import { graphQLClient } from "@/lib/graphql";
 import { useIntersection } from "@mantine/hooks";
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { gql } from "graphql-request";
 import { Loader2 } from "lucide-react";
 import { useEffect, useRef } from "react";
 import { LinkToArticle } from "../Feed/LinkToArticle";
+import { FechedHistoriesList, historiesQuery } from "./FeedContent";
 
-type FechedData = {
-  histories: FechedHistory[];
+type FetchHistoriesProps = InfiniteScrollProps & {
+  initalHistories: FechedHistoriesList;
 };
 
-const query = gql`
-  query Histories($offset: Int, $limit: Int) {
-    histories(offset: $offset, limit: $limit) {
-      id
-      title
-      event_date_utc
-    }
-  }
-`;
-
-export const FetchHistories = ({ category, limit }: InfiniteScrollProps) => {
+export const FetchHistories = ({
+  category,
+  limit,
+  initalHistories,
+}: FetchHistoriesProps) => {
   const lastArticleRef = useRef<HTMLElement>(null);
   const { ref, entry } = useIntersection({
     root: lastArticleRef.current,
@@ -30,14 +24,18 @@ export const FetchHistories = ({ category, limit }: InfiniteScrollProps) => {
   });
 
   const { data, fetchNextPage, isFetching, isError } =
-    useInfiniteQuery<FechedData>({
+    useInfiniteQuery<FechedHistoriesList>({
       queryKey: ["infinite-histories"],
-      queryFn: async ({ pageParam = 0 }) =>
-        graphQLClient.request(query, {
+      queryFn: async ({ pageParam = 1 }) =>
+        graphQLClient.request(historiesQuery, {
           offset: pageParam,
           limit: pageParam + limit,
         }),
       getNextPageParam: (_, pages) => pages.length * limit,
+      initialData: {
+        pages: [initalHistories],
+        pageParams: [1],
+      },
     });
 
   useEffect(() => {
@@ -54,7 +52,7 @@ export const FetchHistories = ({ category, limit }: InfiniteScrollProps) => {
             <article
               key={history.id}
               ref={ref}
-              className="bg-secondDark rounded-md focus:bg-secondLightGray/70 hover:bg-secondLightGray/70 transition p-2"
+              className="bg-secondDark rounded-md focus:bg-secondLightGray/70 hover:bg-secondLightGray/70 transition p-2  max-w-5xl mx-auto"
             >
               <LinkToArticle
                 category={category}

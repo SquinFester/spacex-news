@@ -12,7 +12,7 @@ export const CategoryTabs = () => {
   };
 
   return (
-    <nav>
+    <nav className="max-w-4xl mx-auto">
       <ul className="grid grid-cols-4 text-center">
         {categories.map((tab, index) => (
           <li

@@ -22,6 +22,7 @@ export async function POST(req: Request) {
           userId: session.user.id,
         },
       });
+      return new Response("deleted", { status: 200 });
     } else {
       await db.article.create({
         data: {
@@ -33,8 +34,8 @@ export async function POST(req: Request) {
           title: title,
         },
       });
+      return new Response("added", { status: 200 });
     }
-    return new Response("succes", { status: 200 });
   } catch (error) {
     if (error instanceof z.ZodError) {
       return new Response("error", { status: 422 });

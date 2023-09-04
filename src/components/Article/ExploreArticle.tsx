@@ -8,7 +8,6 @@ import { ArticleMenu } from "./ArticleMenu";
 type ArticleProps = {
   category: string;
   articleId: string;
-  isSaved: boolean;
 };
 
 type FechedData = {
@@ -38,11 +37,7 @@ const query = gql`
   }
 `;
 
-export const ExploreArticle = async ({
-  category,
-  articleId,
-  isSaved,
-}: ArticleProps) => {
+export const ExploreArticle = async ({ category, articleId }: ArticleProps) => {
   const { launch } = await graphQLClient.request<FechedData>(query, {
     launchId: articleId,
   });
@@ -62,9 +57,8 @@ export const ExploreArticle = async ({
         type={"explore"}
         title={mission_name}
         date={launch_date_utc.toString()}
-        isSaved={isSaved}
       />
-      <div className="w-full h-[266px] overflow-hidden">
+      <div className="h-[266px] overflow-hidden mx-auto max-w-xl">
         <Image src="/google.png" alt="google image" width={400} height={266} />
       </div>
       <main className="px-4 py-6 space-y-4">

@@ -1,6 +1,6 @@
 import { format } from "date-fns";
 import Link from "next/link";
-import { SavedIcon } from "../Icons/Icons";
+import { SavedIconToggle } from "../Saved/SavedIconToggle";
 
 type ArticlePreviewProps = {
   category: string;
@@ -29,7 +29,16 @@ export const ArticlePreview = ({
           <time className="text-sm text-lightGray">
             {format(date, "MMM dd, yyyy")}
           </time>
-          <SavedIcon color="#888888" width={20} />
+          <SavedIconToggle
+            articleId={id}
+            type={"explore"}
+            category={category}
+            title={title}
+            date={date.toDateString()}
+            width={20}
+            height={20}
+            color="#888888"
+          />
         </section>
       </Link>
     </article>

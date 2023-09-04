@@ -13,28 +13,40 @@ export const HamburgerMenu = () => {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Image src="/hamburger.svg" alt="menu button" width={35} height={35} />
+        <Image
+          src="/hamburger.svg"
+          alt="menu button"
+          width={35}
+          height={35}
+          className="cursor-pointer"
+        />
       </SheetTrigger>
       <SheetContent side="left" className="flex flex-col">
         <SheetHeader className="items-end">
           <SheetClose asChild>
-            <ChevronLeft width={50} height={40} />
+            <ChevronLeft width={50} height={40} className="cursor-pointer" />
           </SheetClose>
         </SheetHeader>
         <section className="flex-1">
           <ul className="divide-y">
             <li className="py-4 text-2xl active:bg-white active:text-darkGray transition">
-              <Link href="/explore">Explore</Link>
+              <Link href="/explore" className="w-full h-full block">
+                Explore
+              </Link>
             </li>
             <li className="py-4 text-2xl active:bg-white active:text-darkGray transition">
-              <Link href="/saved">Saved</Link>
+              <Link href="/saved" className="w-full h-full block">
+                Saved
+              </Link>
             </li>
             <li className="py-4 text-2xl active:bg-white active:text-darkGray transition">
-              <Link href="/profile">Profile</Link>
+              <Link href="/profile" className="w-full h-full block">
+                Profile
+              </Link>
             </li>
           </ul>
         </section>
-        <SheetFooter className="text-center">
+        <SheetFooter className="mx-auto">
           &copy; Przymencki {new Date().getFullYear()}
         </SheetFooter>
       </SheetContent>

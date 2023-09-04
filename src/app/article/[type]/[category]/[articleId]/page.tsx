@@ -1,8 +1,6 @@
 import { ExploreArticle } from "@/components/Article/ExploreArticle";
 import { FeedArticle } from "@/components/Article/FeedArticle";
-import { getAuthSession } from "@/lib/auth";
 import { categories, typesList } from "@/lib/categoriesList";
-import { db } from "@/lib/db";
 import { notFound } from "next/navigation";
 
 type ArticleProps = {
@@ -24,30 +22,14 @@ const Article = async ({
 }: ArticleProps) => {
   if (!categories.includes(category)) notFound();
   if (!typesList.includes(type)) notFound();
-  const session = await getAuthSession();
-
-  const isSaved = !!(await db.article.findFirst({
-    where: {
-      id: articleId,
-      userId: session?.user.id,
-    },
-  }));
 
   return (
     <>
       {type === "feed" && (
-        <FeedArticle
-          category={category}
-          articleId={articleId}
-          isSaved={isSaved}
-        />
+        <FeedArticle category={category} articleId={articleId} />
       )}
       {type === "explore" && (
-        <ExploreArticle
-          category={category}
-          articleId={articleId}
-          isSaved={isSaved}
-        />
+        <ExploreArticle category={category} articleId={articleId} />
       )}
     </>
   );
