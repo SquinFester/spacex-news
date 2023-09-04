@@ -48,7 +48,7 @@ export const FetchHistories = ({ category, limit }: InfiniteScrollProps) => {
 
   return (
     <>
-      {data &&
+      {data?.pages[0].histories &&
         data?.pages.map((historiesList) =>
           historiesList.histories.map((history) => (
             <article
@@ -61,6 +61,7 @@ export const FetchHistories = ({ category, limit }: InfiniteScrollProps) => {
                 id={history.id}
                 title={history.title}
                 date={new Date(history.event_date_utc)}
+                type="feed"
               />
             </article>
           ))

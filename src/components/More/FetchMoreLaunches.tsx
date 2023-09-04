@@ -48,7 +48,7 @@ export const FetchMoreLaunches = ({ category, limit }: InfiniteScrollProps) => {
 
   return (
     <>
-      {data &&
+      {data?.pages[0].launches &&
         data?.pages.map((launchesList) =>
           launchesList.launches.map((launch) => (
             <article
@@ -61,6 +61,7 @@ export const FetchMoreLaunches = ({ category, limit }: InfiniteScrollProps) => {
                 id={launch.id}
                 title={launch.mission_name}
                 date={new Date(launch.launch_date_utc)}
+                type="explore"
               />
             </article>
           ))

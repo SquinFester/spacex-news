@@ -1,5 +1,5 @@
-import { ExploreMoreContent } from "@/components/More/ExploreMoreContent";
-import { FeedMoreContent } from "@/components/More/FeedMoreContent";
+import { FetchHistories } from "@/components/Feed/FetchHistories";
+import { FetchMoreLaunches } from "@/components/More/FetchMoreLaunches";
 import { categories } from "@/lib/categoriesList";
 import { notFound } from "next/navigation";
 
@@ -18,9 +18,14 @@ export async function generateStaticParams() {
 
 const More = ({ params: { type, category } }: MoreProps) => {
   if (!categories.includes(category)) notFound();
-  if (type === "feed") return <FeedMoreContent category={category} />;
-  else if (type === "explore")
-    return <ExploreMoreContent category={category} />;
-  else notFound();
+  if (type !== "feed" && type !== "explore") notFound();
+  return (
+    <main className="space-y-4 pb-24 px-4 pt-4">
+      {type === "feed" && <FetchHistories category={category} limit={10} />}
+      {type === "explore" && (
+        <FetchMoreLaunches category={category} limit={10} />
+      )}
+    </main>
+  );
 };
 export default More;
