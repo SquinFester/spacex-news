@@ -30,6 +30,7 @@ export const ArticleMenu = ({
           height={30}
           onClick={back}
           className="cursor-pointer"
+          aria-label="back to previous page"
         />
       </nav>
       <section className="flex justify-between items-center gap-4">
