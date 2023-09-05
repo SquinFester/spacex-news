@@ -58,7 +58,7 @@ export const ExploreArticle = async ({ category, articleId }: ArticleProps) => {
         title={mission_name}
         date={launch_date_utc.toString()}
       />
-      <div className="h-[266px] overflow-hidden mx-auto max-w-xl">
+      <div className="overflow-hidden mx-auto max-w-xl">
         <Image src="/google.png" alt="google image" width={400} height={266} />
       </div>
       <main className="px-4 py-6 space-y-4">

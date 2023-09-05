@@ -28,7 +28,7 @@ export const ArticleContent = ({
       </time>
       <section className="flex gap-6 pt-2">
         {reddit && (
-          <Link href={reddit} target="_blank">
+          <Link href={reddit} target="_blank" aria-label="linkt to reddit">
             <Image
               src="/reddit-icon.svg"
               alt="reddit logo"
@@ -38,7 +38,11 @@ export const ArticleContent = ({
           </Link>
         )}
         {wikipedia && (
-          <Link href={wikipedia} target="_blank">
+          <Link
+            href={wikipedia}
+            target="_blank"
+            aria-label="linkt to wikipedia"
+          >
             <Image
               src="/wikipedia-icon.svg"
               alt="wikipedia logo"
@@ -48,7 +52,7 @@ export const ArticleContent = ({
           </Link>
         )}
         {article && (
-          <Link href={article} target="_blank">
+          <Link href={article} target="_blank" aria-label="linkt to article">
             <LinkIcon className="text-white/70" />
           </Link>
         )}

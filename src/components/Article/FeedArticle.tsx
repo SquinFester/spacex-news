@@ -61,8 +61,14 @@ export const FeedArticle = async ({
         title={title}
         date={event_date_utc.toString()}
       />
-      <div className="h-[266px] overflow-hidden mx-auto max-w-xl">
-        <Image src="/google.png" alt="google image" width={400} height={266} />
+      <div className="overflow-hidden mx-auto max-w-xl">
+        <Image
+          src="/google.png"
+          alt="google image"
+          width={400}
+          height={266}
+          className="mx-auto"
+        />
       </div>
       <main className="px-4 py-6 space-y-4">
         <ArticleCategory category={category} />
