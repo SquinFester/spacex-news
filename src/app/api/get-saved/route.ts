@@ -23,6 +23,7 @@ export async function GET(req: Request) {
       take: parseInt(limit),
       skip: (parseInt(page) - 1) * parseInt(limit),
     });
+    if (!articles.length) new Response("empty array");
     return new Response(JSON.stringify(articles));
   } catch (error) {
     if (error instanceof z.ZodError) {

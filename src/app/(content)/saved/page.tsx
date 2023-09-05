@@ -6,7 +6,11 @@ const Saved = async () => {
 
   return (
     <main className="px-4 py-6 space-y-4">
-      <SavedContent isSession={!!session} />
+      {session ? (
+        <SavedContent />
+      ) : (
+        <p className="text-center text-sm">The list is empty</p>
+      )}
     </main>
   );
 };

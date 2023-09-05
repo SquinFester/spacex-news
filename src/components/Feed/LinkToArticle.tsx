@@ -40,7 +40,6 @@ export const LinkToArticle = ({
             width={20}
             height={20}
             color="#888888"
-            isSaved={false}
           />
           <TripleDotsIcon width={20} height={20} color="#888888" />
         </div>

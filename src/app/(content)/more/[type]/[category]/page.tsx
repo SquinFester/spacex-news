@@ -1,4 +1,4 @@
-import { FetchHistories } from "@/components/Feed/FetchHistories";
+import { FetchMoreHistories } from "@/components/More/FetchMoreHistories";
 import { FetchMoreLaunches } from "@/components/More/FetchMoreLaunches";
 import { categories, typesList } from "@/lib/categoriesList";
 import { notFound } from "next/navigation";
@@ -20,8 +20,8 @@ const More = ({ params: { type, category } }: MoreProps) => {
   if (!categories.includes(category)) notFound();
   if (!typesList.includes(type)) notFound();
   return (
-    <main className="space-y-4 pb-24 px-4 pt-4">
-      {type === "feed" && <FetchHistories category={category} limit={10} />}
+    <main className="px-4 pt-4">
+      {type === "feed" && <FetchMoreHistories category={category} limit={10} />}
       {type === "explore" && (
         <FetchMoreLaunches category={category} limit={10} />
       )}

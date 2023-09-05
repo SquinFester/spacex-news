@@ -1,25 +1,22 @@
 "use client";
 
-import { graphQLClient } from "@/lib/graphql";
 import { useIntersection } from "@mantine/hooks";
-import { useInfiniteQuery } from "@tanstack/react-query";
-import { Loader2 } from "lucide-react";
 import { useEffect, useRef } from "react";
+import { useInfiniteQuery } from "@tanstack/react-query";
+import { graphQLClient } from "@/lib/graphql";
+import { FechedLaunchesList, launchesQuery } from "./FetchMoreLaunches";
 import { LinkToArticle } from "../Feed/LinkToArticle";
-import {
-  FechedHistoriesList,
-  historiesQuery,
-} from "../More/FetchMoreHistories";
+import { Loader2 } from "lucide-react";
 
-type FetchHistoriesProps = InfiniteScrollProps & {
-  initalHistories: FechedHistoriesList;
+type FetchLaunchesProps = InfiniteScrollProps & {
+  initalLaunches: FechedLaunchesList;
 };
 
-export const FetchHistories = ({
+export const FetchLaunches = ({
   category,
   limit,
-  initalHistories,
-}: FetchHistoriesProps) => {
+  initalLaunches,
+}: FetchLaunchesProps) => {
   const lastArticleRef = useRef<HTMLElement>(null);
   const { ref, entry } = useIntersection({
     root: lastArticleRef.current,
@@ -27,16 +24,16 @@ export const FetchHistories = ({
   });
 
   const { data, fetchNextPage, isFetching, isError } =
-    useInfiniteQuery<FechedHistoriesList>({
-      queryKey: ["infinite-histories"],
+    useInfiniteQuery<FechedLaunchesList>({
+      queryKey: ["infinite-launches"],
       queryFn: async ({ pageParam = limit }) =>
-        graphQLClient.request(historiesQuery, {
+        graphQLClient.request(launchesQuery, {
           offset: pageParam,
           limit: pageParam + limit,
         }),
       getNextPageParam: (_, pages) => pages.length * limit,
       initialData: {
-        pages: [initalHistories],
+        pages: [initalLaunches],
         pageParams: [0],
       },
     });
@@ -49,20 +46,20 @@ export const FetchHistories = ({
 
   return (
     <>
-      {data?.pages[0].histories &&
+      {data?.pages[0].launches &&
         data?.pages.map((page) =>
-          page.histories.map((history) => (
+          page.launches.map((launch) => (
             <article
-              key={history.id}
+              key={launch.id}
               ref={ref}
               className="bg-secondDark rounded-md focus:bg-secondLightGray/70 hover:bg-secondLightGray/70 transition p-2  max-w-5xl mx-auto"
             >
               <LinkToArticle
                 category={category}
-                id={history.id}
-                title={history.title}
-                date={new Date(history.event_date_utc)}
-                type="feed"
+                id={launch.id}
+                title={launch.mission_name}
+                date={new Date(launch.launch_date_utc)}
+                type="explore"
               />
             </article>
           ))
